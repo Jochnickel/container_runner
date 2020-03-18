@@ -1,0 +1,12 @@
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+
+table ip nat {
+	chain prerouting {
+		type nat hook prerouting priority -100;
+		tcp dport 80 redirect to 8080
+		tcp dport 443 redirect to 8443
+	}
+}
